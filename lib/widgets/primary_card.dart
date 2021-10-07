@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:new_app/constants.dart';
-import 'package:new_app/models/news.dart';
+import 'package:new_app/models/news_modal.dart';
+import 'package:new_app/models/news_old.dart';
 
 class PrimaryCard extends StatelessWidget {
-  final News news;
+  final NewsModal news;
   const PrimaryCard({Key? key, required this.news}) : super(key: key);
 
   @override
@@ -34,7 +35,7 @@ class PrimaryCard extends StatelessWidget {
           SizedBox(height: 5.0),
           Expanded(
             child: Hero(
-              tag: news.seen,
+              tag: news.image,
               child: Container(
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(15.0),
@@ -54,17 +55,15 @@ class PrimaryCard extends StatelessWidget {
           SizedBox(height: 5.0),
           Row(
             children: [
-              Text(
-                news.time,
-                style: kDetailContent,
-              ),
-              SizedBox(width: 10.0),
               CircleAvatar(
                 radius: 5.0,
                 backgroundColor: kGrey1,
               ),
-              SizedBox(width: 10.0),
-              Text("${news.estimate} min"),
+              SizedBox(width: 4.0),
+              Text(
+                news.time,
+                style: kDetailContent,
+              ),
             ],
           ),
         ],

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:new_app/constants.dart';
 import 'buttomnav.dart';
 
 void main() {
@@ -15,7 +16,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'News',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.grey,
       ),
       home: ButtomNav(),
     );

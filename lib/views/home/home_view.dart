@@ -1,49 +1,33 @@
 import 'package:flutter/material.dart';
 import 'package:new_app/constants.dart';
-import 'package:new_app/views/home/popular_tab_view.dart';
-import 'package:new_app/views/home/recent_view.dart';
-import 'package:new_app/views/home/trending_view.dart';
+import 'package:new_app/views/home/TabBarViews/entertainment_view.dart';
+import 'package:new_app/views/home/TabBarViews/health_view.dart';
+import 'package:new_app/views/home/TabBarViews/science_view.dart';
+import 'package:new_app/views/home/TabBarViews/sport_view.dart';
+import 'package:new_app/views/home/TabBarViews/technology_view.dart';
+import 'package:new_app/views/home/TabBarViews/business_view.dart';
+import 'package:new_app/views/home/TabBarViews/general.dart';
+import 'package:new_app/widgets/appbar_ListTile.dart';
 
 class HomeView extends StatelessWidget {
   const HomeView({Key? key}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
-      length: 8,
+      length: 7,
       child: Scaffold(
         appBar: PreferredSize(
           preferredSize: Size.fromHeight(120.0),
           child: Column(
             children: [
-              ListTile(
-                title: Text(
-                  "WELCOME",
-                  textAlign: TextAlign.start,
-                  style: kNonActiveTabStyle,
-                ),
-                subtitle: Text(
-                  "Tuesday 17th, 2020",
-                  textAlign: TextAlign.start,
-                  style: kActiveTabStyle,
-                ),
-                leading: Container(
-                  width: 50.0,
-                  height: 50.0,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10.0),
-                    image: DecorationImage(
-                      image: AssetImage("assets/Apple_News_app_blk.png"),
-                      fit: BoxFit.cover,
-                    ),
-                  ),
-                ),
-              ),
+              appbar_ListTile(),
               Align(
                 alignment: Alignment.topLeft,
                 child: TabBar(
                   labelColor: Colors.black,
                   unselectedLabelColor: kGrey1,
+                  physics: const BouncingScrollPhysics(
+                      parent: AlwaysScrollableScrollPhysics()),
                   // unselectedLabelStyle: kNonActiveTabStyle,
                   indicatorSize: TabBarIndicatorSize.label,
                   isScrollable: true,
@@ -54,7 +38,6 @@ class HomeView extends StatelessWidget {
                     Tab(text: "Business"),
                     Tab(text: "Technology"),
                     Tab(text: "Entertainment"),
-                    Tab(text: "General"),
                     Tab(text: "Health"),
                     Tab(text: "Science"),
                     Tab(text: "Sports"),
@@ -65,15 +48,16 @@ class HomeView extends StatelessWidget {
           ),
         ),
         body: TabBarView(
+          physics: const BouncingScrollPhysics(
+              parent: AlwaysScrollableScrollPhysics()),
           children: [
             PopularTabView(),
-            TrendingTabView(),
-            RecentTabView(),
-            Text("data"),
-            Text("data"),
-            Text("data"),
-            Text("data"),
-            Text("data"),
+            BusinessTabView(),
+            TechnologyTabView(),
+            EntertainmentTabView(),
+            HealthTabView(),
+            ScienceTabView(),
+            SportTabView(),
           ],
         ),
       ),

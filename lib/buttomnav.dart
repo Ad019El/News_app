@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:new_app/models/news.dart';
+import 'package:new_app/models/news_old.dart';
 import 'package:new_app/views/account_view.dart';
 import 'package:new_app/views/favorite_view.dart';
 import 'package:new_app/views/home/home_view.dart';
@@ -16,6 +18,7 @@ class _ButtomNavState extends State<ButtomNav> {
   @override
   int _selectedIndex = 0;
 
+  @override
   void _onItemTapped(int index) {
     setState(() {
       _selectedIndex = index;

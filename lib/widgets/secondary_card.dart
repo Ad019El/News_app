@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:new_app/constants.dart';
-import 'package:new_app/models/news.dart';
+import 'package:new_app/models/news_modal.dart';
+import 'package:new_app/models/news_old.dart';
 
 class SecondaryCard extends StatelessWidget {
-  final News news;
+  final NewsModal news;
   const SecondaryCard({Key? key, required this.news}) : super(key: key);
 
   @override
@@ -17,13 +18,16 @@ class SecondaryCard extends StatelessWidget {
       ),
       child: Row(
         children: [
-          Container(
-            height: 135.0,
-            width: 90.0,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(12.0),
-              image: DecorationImage(
-                  image: NetworkImage(news.image), fit: BoxFit.cover),
+          Hero(
+            tag: news.image,
+            child: Container(
+              height: 135.0,
+              width: 90.0,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(12.0),
+                image: DecorationImage(
+                    image: NetworkImage(news.image), fit: BoxFit.cover),
+              ),
             ),
           ),
           SizedBox(width: 12.0),
@@ -41,7 +45,7 @@ class SecondaryCard extends StatelessWidget {
                   ),
                   SizedBox(height: 4.0),
                   Text(
-                    news.subtitle,
+                    news.title,
                     overflow: TextOverflow.ellipsis,
                     maxLines: 2,
                     style: kDetailContent,
@@ -49,17 +53,23 @@ class SecondaryCard extends StatelessWidget {
                   Spacer(),
                   Row(
                     children: [
-                      Text(
-                        news.time,
-                        style: kDetailContent,
-                      ),
-                      SizedBox(width: 10.0),
                       CircleAvatar(
                         radius: 5.0,
                         backgroundColor: kGrey1,
                       ),
-                      SizedBox(width: 10.0),
-                      Text("${news.estimate} min read", style: kDetailContent),
+                      SizedBox(width: 1.0),
+                      Text(
+                        news.time,
+                        style: kDetailContent,
+                      ),
+                      // SizedBox(width: 4.0),
+                      // SizedBox(
+                      //   width: 10.0,
+                      //   child: Divider(
+                      //     color: kBlack,
+                      //     height: 1.0,
+                      //   ),
+                      // ),
                     ],
                   ),
                 ],

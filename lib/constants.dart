@@ -46,3 +46,13 @@ var descriptionStyle = GoogleFonts.roboto(
   fontSize: 15.0,
   height: 2.0,
 ));
+var kBigTitleStyle = GoogleFonts.roboto(
+  textStyle: TextStyle(
+    fontSize: 48,
+    fontWeight: FontWeight.w800,
+  ),
+);
+
+var kSubTitleStyle = GoogleFonts.roboto(
+  textStyle: TextStyle(fontSize: 16, color: kGrey1),
+);

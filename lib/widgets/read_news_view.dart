@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:new_app/constants.dart';
-import 'package:new_app/models/news.dart';
+import 'package:new_app/models/news_modal.dart';
+import 'package:new_app/models/news_old.dart';
 import 'package:new_app/widgets/cyrcle_buttom.dart';
+import 'package:new_app/widgets/webview.dart';
+import 'package:webview_flutter/webview_flutter.dart';
 
 class ReadNewsView extends StatelessWidget {
-  final News news;
+  final NewsModal news;
   ReadNewsView({required this.news});
   @override
   Widget build(BuildContext context) {
@@ -45,7 +48,7 @@ class ReadNewsView extends StatelessWidget {
           children: [
             SizedBox(height: 12.0),
             Hero(
-              tag: news.seen,
+              tag: news.image,
               child: Container(
                 height: 220.0,
                 decoration: BoxDecoration(
@@ -84,15 +87,25 @@ class ReadNewsView extends StatelessWidget {
                   ),
                 ),
                 Spacer(),
-                Status(
-                  icon: Icons.remove_red_eye,
-                  total: news.seen,
+                Container(
+                  child: Row(
+                    children: [
+                      Icon(
+                        Icons.date_range_rounded,
+                        color: kGrey2,
+                      ),
+                      SizedBox(width: 5),
+                      Text(
+                        news.time,
+                        style: TextStyle(
+                          color: kGrey1,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      )
+                    ],
+                  ),
                 ),
                 SizedBox(width: 15.0),
-                Status(
-                  icon: Icons.favorite_border,
-                  total: news.favorite,
-                ),
               ],
             ),
             SizedBox(height: 12.0),
@@ -111,17 +124,52 @@ class ReadNewsView extends StatelessWidget {
                 ),
                 SizedBox(width: 5.0),
                 Text(
-                  news.author,
+                  news.sourceName,
                   style: kDetailContent.copyWith(color: Colors.black),
                 ),
               ],
             ),
             SizedBox(height: 15.0),
             Text(
-              news.content,
+              news.description,
               style: descriptionStyle,
             ),
-            SizedBox(height: 25.0)
+            SizedBox(height: 25.0),
+            Padding(
+              padding: EdgeInsets.symmetric(
+                horizontal: 15.0,
+                vertical: 20.0,
+              ),
+              child: Column(
+                children: [
+                  OutlinedButton(
+                    style: OutlinedButton.styleFrom(
+                      shape: StadiumBorder(),
+                      side: BorderSide(
+                        width: 2,
+                        color: kBlack,
+                      ),
+                    ),
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => WebViewPage(url: news.url),
+                        ),
+                      );
+                    },
+                    child: Padding(
+                      padding: const EdgeInsets.only(
+                          top: 20, bottom: 20, left: 10, right: 10),
+                      child: Text(
+                        'Read more...',
+                        style: kTitleCard,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
           ],
         ),
       ),
@@ -129,18 +177,18 @@ class ReadNewsView extends StatelessWidget {
   }
 }
 
-class Status extends StatelessWidget {
-  final IconData icon;
-  final String total;
-  Status({required this.icon, required this.total});
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      children: [
-        Icon(icon, color: kGrey2),
-        SizedBox(width: 4.0),
-        Text(total, style: kDetailContent),
-      ],
-    );
-  }
-}
+// class Status extends StatelessWidget {
+//   final IconData icon;
+//   final String total;
+//   Status({required this.icon, required this.total});
+//   @override
+//   Widget build(BuildContext context) {
+//     return Row(
+//       children: [
+//         Icon(icon, color: kGrey2),
+//         SizedBox(width: 4.0),
+//         Text(total, style: kDetailContent),
+//       ],
+//     );
+//   }
+// }

@@ -1,35 +1,36 @@
 import 'package:flutter/material.dart';
 import 'package:new_app/models/news.dart';
-import 'package:new_app/views/home/read_news_view.dart';
-import 'package:new_app/widgets/primary_card.dart';
+import 'package:new_app/models/news_old.dart';
+import 'package:new_app/widgets/read_news_view.dart';
+import 'package:new_app/widgets/secondary_card.dart';
 
-class TrendingTabView extends StatelessWidget {
-  const TrendingTabView({Key? key}) : super(key: key);
+class HealthTabView extends StatelessWidget {
+  const HealthTabView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
-      itemCount: trendingList.length,
+      itemCount: healthNews.length,
       scrollDirection: Axis.vertical,
-      shrinkWrap: true,
       physics: BouncingScrollPhysics(),
+      shrinkWrap: true,
       itemBuilder: (context, index) {
-        var trending = trendingList[index];
+        var news = healthNews[index];
 
         return InkWell(
           onTap: () {
             Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => ReadNewsView(news: trending),
+                builder: (context) => ReadNewsView(news: news),
               ),
             );
           },
           child: Container(
             width: double.infinity,
-            height: 300.0,
-            margin: EdgeInsets.symmetric(horizontal: 18.0, vertical: 12.0),
-            child: PrimaryCard(news: trending),
+            height: 135.0,
+            margin: EdgeInsets.symmetric(horizontal: 18.0, vertical: 8.0),
+            child: SecondaryCard(news: news),
           ),
         );
       },
